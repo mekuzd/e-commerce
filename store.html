@@ -48,7 +48,7 @@
             h1 {
                 text-align: center;
                 font-size: 60px;
-                color: Gold;
+                color: seagreen;
             }
 
             span {
@@ -70,16 +70,23 @@
             }
 
             .fa {
-                font-size: 50px;
-                color: red;
+                cursor: pointer;
+                font-size: 40px;
+                color: lightsalmon;
             }
 
-            .cart {
-                height: 20px;
-                width: 20px;
-                border: 1px solid black;
-                border-radius: 100%;
+            #cart {
+                color: aqua;
+                text-align: center;
+                font-size: 15px;
+                position: relative;
+                top: -45px;
+                left: 30px;
+                height: 15px;
+                width: 15px;
 
+                border-radius: 100%;
+                background-color: white;
             }
 
             button {
@@ -95,7 +102,9 @@
         <div class="nav">
             <h1>Store </h1>
 
-            <i onclick="cart()" class="fa fa-shopping-cart"><span class="cart"> </span> </i>
+            <i onclick="cart()" class="fa fa-shopping-cart">
+                <div id="cart"> </div>
+            </i>
 
         </div>
 
@@ -107,7 +116,9 @@
 
 </html>
 <script>
+
     let cartItems = []
+
     let container = []
     fetch('store.json')
         .then((response) => response.json())
@@ -139,9 +150,9 @@
         let objinstore = { title, imageSource, price }
 
         cartItems.push(objinstore)
+        document.getElementById('cart').innerHTML = cartItems.length
         console.log(cartItems);
         localStorage.setItem("objinstore", JSON.stringify(cartItems))
-
 
     }
 

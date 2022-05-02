@@ -10,8 +10,115 @@
         <title>Cart</title>
     </head>
 
-    <body>
+    <style>
+        h1 {
+            text-align: center;
+        }
 
+        #box {
+            padding: 10px;
+            box-shadow: 0px 0px 3px lightgrey;
+            width: 50%;
+            /* height: 300px; */
+            margin: auto;
+            background-color: transparent;
+
+        }
+
+        .obj {
+            color: grey;
+            padding: 10px;
+            margin: 20px;
+            width: 95%;
+            height: 150px;
+            box-shadow: 0px 0px 3px grey;
+        }
+
+        img {
+            max-width: 100%;
+            width: auto;
+            height: 50px;
+        }
+
+        h3 {
+            color: black;
+            font-size: 15px;
+        }
+
+        h5 {
+            position: relative;
+            top: -40px;
+            text-align: right;
+        }
+
+        .btns {
+            position: relative;
+            top: -20px;
+            float: right;
+        }
+
+        #qty {
+            background-color: transparent;
+            border: none;
+        }
+
+        .btn {
+            position: relative;
+            top: -20px;
+        }
+
+        .operators {
+            border-color: orange;
+            background-color: orange;
+            color: white;
+        }
+    </style>
+
+
+
+    <body>
+        <h1>Cart-Items</h1>
+        <div id="box">
+
+        </div>
     </body>
 
 </html>
+
+<script>
+
+    let objinStore = localStorage.getItem("objinstore")
+
+    let ArrofobjinStore = JSON.parse(objinStore)
+
+    ArrofobjinStore.map((value, index) => {
+
+        document.getElementById('box').innerHTML += `
+        
+        
+         <div class=" obj">
+                 <div style= " width: 100% ;"> <img src= ${value.imageSource} /> </div> 
+                 <h3> ${value.title}</h3>
+                <h5>  ${value.price} $</h5>
+                <button class="btn btn-danger " onclick="  Removefromcart( ${index}) "> Remove </button>
+               <div class="btns">
+                <button class=" operators" > &minus;    </button>
+               <button id="qty"> 1 </button> 
+                <button class="operators" >  &plus;  </button>
+                </div>
+
+            </div >    
+    
+        
+        
+        `
+
+
+    })
+
+
+
+
+
+
+</script>
