@@ -107,7 +107,7 @@
 
 </html>
 <script>
-
+    let cartItems = []
     let container = []
     fetch('store.json')
         .then((response) => response.json())
@@ -138,8 +138,9 @@
 
         let objinstore = { title, imageSource, price }
 
-        container.push(objinstore)
-        localStorage.setItem("objinstore", JSON.stringify(container))
+        cartItems.push(objinstore)
+        console.log(cartItems);
+        localStorage.setItem("objinstore", JSON.stringify(cartItems))
 
 
     }
