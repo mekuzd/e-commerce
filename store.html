@@ -95,7 +95,7 @@
         <div class="nav">
             <h1>Store </h1>
 
-            <i class="fa fa-shopping-cart"><span class="cart"> </span> </i>
+            <i onclick="cart()" class="fa fa-shopping-cart"><span class="cart"> </span> </i>
 
         </div>
 
@@ -112,18 +112,17 @@
     fetch('store.json')
         .then((response) => response.json())
         .then((items) => {
+            container = items
+            items.map((val, index) => {
 
-            items.map((val) => {
-                let newVal = { ...val }
-                newVal.quantity = 1;
 
                 document.getElementById('display').innerHTML +=
                     `
                 <div class=" obj">
                  <h3> ${val.title}</h3>
-                 <div style= " width: 100% ;"> <img src= ${val.image}  />  </div>   
+                 <div style= " width: 100% ;"> <img src= ${val.image} /> </div>   
                 <h5> <span> Price: </span>  ${val.price} $</h5>
-                <button onclick="  addtocart( ${newVal}) "> Add </button>
+                <button onclick="  addtocart( ${index}) "> Add </button>
             </div >
       
                 `
@@ -132,10 +131,22 @@
 
         })
 
-    function addtocart(val) {
-        container.push(val)
-        localStorage.setItem("cartItems", JSON.stringify(container))
+    function addtocart(index) {
+        let title = container[index].title
+        let imageSource = container[index].image
+        let price = container[index].price
+
+        let objinstore = { title, imageSource, price }
+
+        container.push(objinstore)
+        localStorage.setItem("objinstore", JSON.stringify(container))
+
 
     }
 
+
+    function cart() {
+        window.location.href = "cart.html"
+
+    }
 </script>
