@@ -19,18 +19,17 @@
             padding: 10px;
             box-shadow: 0px 0px 3px lightgrey;
             width: 50%;
-            /* height: 300px; */
             margin: auto;
             background-color: transparent;
 
         }
 
         .obj {
+            position: relative;
             color: grey;
             padding: 10px;
             margin: 20px;
             width: 95%;
-            height: 150px;
             box-shadow: 0px 0px 3px grey;
         }
 
@@ -63,14 +62,26 @@
         }
 
         .btn {
-            position: relative;
-            top: -20px;
+            position: absolute;
+            top: 175px;
+            left: 522px;
         }
 
         .operators {
             border-color: orange;
             background-color: orange;
             color: white;
+        }
+
+        .totalbtn {
+            background-color: transparent;
+            border: none;
+            font-size: 22px;
+            width: 20%;
+        }
+
+        span {
+            font-size: 22px;
         }
     </style>
 
@@ -98,27 +109,70 @@
         
          <div class=" obj">
                  <div style= " width: 100% ;"> <img src= ${value.imageSource} /> </div> 
-                 <h3> ${value.title}</h3>
-                <h5>  ${value.price} $</h5>
-                <button class="btn btn-danger " onclick="  Removefromcart( ${index}) "> Remove </button>
-               <div class="btns">
-                <button class=" operators" > &minus;    </button>
-               <button id="qty"> 1 </button> 
-                <button class="operators" >  &plus;  </button>
-                </div>
+                 <h3 > ${value.title}</h3>
+                <h5 class="price">   ${value.price} </h5>
+                <button class="btn btn-danger " onclick="  Removefromcart( event, ${index}) "> Remove </button>
+                <div class="btns">
+                <button onclick="minus(${index},event)" class=" operators" > &minus;    </button>
+                <button id="qty"> 1 </button> 
+                <button onclick=" plus(${index},event) " class="operators" >  &plus;  </button>
+                </div> 
+                <br>
+                <p>Total</p>
+              <span>$</span><button class="totalbtn"> ${value.price} </button>
 
             </div >    
     
         
         
         `
-
-
     })
 
 
+    function Removefromcart(event, index) {
+
+        let objinStore = localStorage.getItem("objinstore")
+        let ArrofobjinStore = JSON.parse(objinStore)
+
+        ArrofobjinStore.splice(index, 1)
+        localStorage.setItem("objinstore", JSON.stringify(ArrofobjinStore))
+        event.target.closest('div').remove()
+
+    }
 
 
+    let Total = document.getElementsByClassName('totalbtn')
+
+
+    function plus(index, event) {
+        let p = document.getElementsByClassName('price')
+
+        let qty = event.target.closest('div').children[1].innerHTML
+        let quantity = Number(qty)
+
+        event.target.closest('div').children[1].innerHTML = quantity += 1
+        let price = Number(p[index].innerHTML)
+
+        Total[index].innerHTML = price * quantity
+
+    }
+
+    function minus(index, event) {
+        let p = document.getElementsByClassName('price')
+
+        let qty = event.target.closest('div').children[1].innerHTML
+        let price = Number(p[index].innerHTML)
+        let quantity = Number(qty)
+
+
+        if (quantity > 1) {
+            event.target.closest('div').children[1].innerHTML = quantity - 1
+
+            Total[index].innerHTML = Total[index].innerHTML - price
+
+        }
+
+    }
 
 
 </script>
