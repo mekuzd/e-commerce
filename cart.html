@@ -90,7 +90,9 @@
     <body>
         <h1>Cart-Items</h1>
         <div id="box">
-
+            <h3>Total </h3>
+            <span>$</span>
+            <p id="subtotal"></p>
         </div>
     </body>
 
@@ -128,51 +130,57 @@
         `
     })
 
+    let Total = document.getElementsByClassName('totalbtn')
+    let subtotal = document.getElementById('subtotal')
 
     function Removefromcart(event, index) {
-
         let objinStore = localStorage.getItem("objinstore")
         let ArrofobjinStore = JSON.parse(objinStore)
-
         ArrofobjinStore.splice(index, 1)
         localStorage.setItem("objinstore", JSON.stringify(ArrofobjinStore))
+        subtotal.innerHTML = Number(subtotal.innerHTML) - Number(Total[index].innerHTML)
         event.target.closest('div').remove()
-
     }
 
 
-    let Total = document.getElementsByClassName('totalbtn')
+
 
 
     function plus(index, event) {
         let p = document.getElementsByClassName('price')
-
         let qty = event.target.closest('div').children[1].innerHTML
         let quantity = Number(qty)
-
         event.target.closest('div').children[1].innerHTML = quantity += 1
         let price = Number(p[index].innerHTML)
-
         Total[index].innerHTML = price * quantity
-
+        subtotal.innerHTML = Number(subtotal.innerHTML) + price
     }
 
     function minus(index, event) {
         let p = document.getElementsByClassName('price')
-
         let qty = event.target.closest('div').children[1].innerHTML
         let price = Number(p[index].innerHTML)
         let quantity = Number(qty)
 
-
         if (quantity > 1) {
             event.target.closest('div').children[1].innerHTML = quantity - 1
-
             Total[index].innerHTML = Total[index].innerHTML - price
-
+            subtotal.innerHTML = Number(subtotal.innerHTML) - price
         }
 
     }
+
+
+    let sum = 0
+    for (let index = 0; index < Total.length; index++) {
+
+        sum = Number(sum) + Number(Total[index].innerHTML)
+
+    }
+
+    subtotal.innerHTML = sum
+
+
 
 
 </script>

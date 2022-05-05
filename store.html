@@ -117,6 +117,7 @@
 </html>
 <script>
 
+
     let cartItems = []
 
     let container = []
@@ -143,6 +144,7 @@
         })
 
     function addtocart(index) {
+
         let title = container[index].title
         let imageSource = container[index].image
         let price = container[index].price
@@ -158,6 +160,15 @@
 
     function cart() {
         window.location.href = "cart.html"
-
     }
+
+    let ArrofobjinStore = JSON.parse(localStorage.getItem('objinstore'))
+    ArrofobjinStore.map((value) => {
+        cartItems.push(value)
+    })
+
+    if (cartItems.length > 0) {
+        document.getElementById('cart').innerHTML = cartItems.length
+    }
+
 </script>
