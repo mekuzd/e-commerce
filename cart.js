@@ -1,7 +1,5 @@
 let objinStore = localStorage.getItem("objinstore")
-
 let ArrofobjinStore = JSON.parse(objinStore)
-
 ArrofobjinStore.map((value, index) => {
 
     document.getElementById('box').innerHTML += `
@@ -46,6 +44,7 @@ function plus(index, event) {
     let price = Number(p[index].innerHTML)
     Total[index].innerHTML = Math.round((price * quantity) * 100) / 100
     subtotal.innerHTML = Math.round((Number(subtotal.innerHTML) + price) * 100) / 100
+    console.log(Total[index].innerHTML);
 }
 
 function minus(index, event) {
@@ -61,11 +60,12 @@ function minus(index, event) {
 
 }
 
-
 let sum = 0
 for (let index = 0; index < Total.length; index++) {
     sum = Number(sum) + Number(Total[index].innerHTML)
+
 }
+
 subtotal.innerHTML = sum
 
 
