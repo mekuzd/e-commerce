@@ -45,7 +45,7 @@ function plus(index, event) {
     Total[index].innerHTML = Math.round((price * quantity) * 100) / 100
     subtotal.innerHTML = Math.round((Number(subtotal.innerHTML) + price) * 100) / 100
 
-    console.log(quantity);
+
     ArrofobjinStore[index].quantity = quantity
     ArrofobjinStore[index].total = Math.round((price * quantity) * 100) / 100
     localStorage.setItem("objinstore", JSON.stringify(ArrofobjinStore))
@@ -60,12 +60,12 @@ function minus(index, event) {
     let quantity = Number(qty)
 
     if (quantity > 1) {
-        event.target.closest('div').children[1].innerHTML = quantity - 1
-        Total[index].innerHTML = Math.round((Total[index].innerHTML - price) * 100) / 100
+        event.target.closest('div').children[1].innerHTML = quantity -= 1
+        Total[index].innerHTML = Math.round((quantity * price) * 100) / 100
         subtotal.innerHTML = Math.round((Number(subtotal.innerHTML) - price) * 100) / 100
 
-        ArrofobjinStore[index].quantity = quantity - 1
-        ArrofobjinStore[index].total = Math.round((ArrofobjinStore[index].quantity * price) * 100) / 100
+        ArrofobjinStore[index].quantity = quantity
+        ArrofobjinStore[index].total = Math.round((quantity * price) * 100) / 100
         localStorage.setItem("objinstore", JSON.stringify(ArrofobjinStore))
 
     }
