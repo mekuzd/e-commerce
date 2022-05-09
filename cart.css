@@ -95,3 +95,7 @@ p {
     color: white;
     background-color: seagreen;
 }
+
+#subtotal {
+    margin-left: 10px;
+}
